@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .btn {
+    @apply cursor-pointer font-semibold text-lg bg-fuchsia-600 text-slate-100 px-6 py-2 rounded-md hover:text-fuchsia-600 hover:bg-white transition-all duration-300 ease-in;
+  }
+
+  .btn-outline {
+    @apply cursor-pointer font-semibold text-lg border border-fuchsia-600 text-fuchsia-600 px-6 py-2 rounded-md hover:text-white hover:bg-fuchsia-600 transition-all duration-300 ease-in;
+  }
+
+  .box {
+    @apply bg-white border-slate-500 shadow-md rounded-xl p-8 my-8 lg:mx-16 mx-3;
+  }
+
+  .card {
+    @apply flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-sm md:flex-row md:max-w-xl hover:bg-slate-50;
+  }
+
+  h2 {
+    @apply text-xl font-semibold mb-2 uppercase text-fuchsia-600;
+  }
+
+  input {
+    @apply w-full my-2 outline-none focus:outline-none text-slate-800 placeholder:text-slate-600/60 bg-transparent ring-transparent border border-slate-200 transition-all duration-300 ease-in text-sm rounded-md py-3 px-2.5 ring shadow-sm hover:border-fuchsia-600 hover:ring-fuchsia-600/10 focus:border-fuchsia-600 focus:ring-fuchsia-600/10;
+  }
+
+  textarea {
+    @apply block p-2.5 w-full outline-none focus:outline-none text-slate-800 placeholder:text-slate-600/60 bg-transparent ring-transparent border border-slate-200 transition-all duration-300 ease-in text-sm rounded-md py-3 px-2.5 ring shadow-sm hover:border-fuchsia-600 hover:ring-fuchsia-600/10 focus:border-fuchsia-600 focus:ring-fuchsia-600/10;
+  }
+
+  body {
+    @apply bg-slate-50;
+  }
+}
