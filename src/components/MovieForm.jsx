@@ -4,10 +4,11 @@ const MovieForm = ({ open, addMovie }) => {
 
     // State to store new movie data typed by the user
     const [newMovie, setNewMovie] = useState({
-        title       : '',
-        description : '',
-        posterURL   : 'https://png.pngtree.com/png-vector/20190820/ourmid/pngtree-no-image-vector-illustration-isolated-png-image_1694547.jpg',
-        rating      : 0,
+        title       :   '',
+        description :   '',
+        posterURL   :   'https://png.pngtree.com/png-vector/20190820/ourmid/pngtree-no-image-vector-illustration-isolated-png-image_1694547.jpg',
+        rating      :   0,
+        details     :   { trailer : "", fullDescription : "" }
     });
 
  // Function to handle input changes (text, textarea, number inputs)

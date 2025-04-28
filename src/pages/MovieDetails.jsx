@@ -8,11 +8,15 @@ export default function MovieDetails() {
 
     const [movieData, setMovieData] = useState(null);
     const [loading, setLoading] = useState(true); // state to control initial loading
-
+    
     useEffect(() => {
-        const selectedMovie = movies.find((movie) => movie.id == movieId);
-        setMovieData(selectedMovie || null);
-        setLoading(false); // <- Mark loading as finished
+
+        const storedMovies = JSON.parse(localStorage.getItem('movies')) || []; // Load movies from localStorage
+        const selectedMovie = storedMovies.find((movie) => movie.id == movieId); // Find the movie by id
+
+        setMovieData(selectedMovie || null); // update movieData
+        setLoading(false); // Mark loading as finished
+        
     }, [movieId]);
 
     // While loading, i will implement a spinner later

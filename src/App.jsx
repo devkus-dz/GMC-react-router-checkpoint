@@ -20,9 +20,29 @@ function App() {
   const [idMovie, setIdMovie] = useState(10); 
 
   useEffect(() => {
-    // Load the movies from movies.js when the component first mounts
-    setMoviesData(movies);
+    // Check if movies already exist in localStorage
+    const storedMovies = JSON.parse(localStorage.getItem('movies'));
+
+    if (storedMovies && storedMovies.length > 0) {
+      // If there are movies in localStorage, use them
+      setMoviesData(storedMovies);
+
+      // Update idMovie to avoid duplicate IDs
+      const maxId = Math.max(...storedMovies.map(movie => movie.id));
+      setIdMovie(maxId + 1);
+    } else {
+      // If localStorage is empty, load from movies.js and save to localStorage
+      setMoviesData(movies);
+      localStorage.setItem('movies', JSON.stringify(movies));
+    }
   }, []);
+
+  // Update localStorage every time moviesData changes
+  useEffect(() => {
+    if (moviesData.length > 0) {
+      localStorage.setItem('movies', JSON.stringify(moviesData));
+    }
+  }, [moviesData]);
 
   // Create a filtered list based on title and rating
   const filteredMovies = moviesData.filter(
