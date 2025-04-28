@@ -11,14 +11,26 @@ const MovieForm = ({ open, addMovie }) => {
         details     :   { trailer : "", fullDescription : "" }
     });
 
- // Function to handle input changes (text, textarea, number inputs)
+    // Function to handle input changes (text, textarea, number inputs)
     const handleChange = (e) => {
         const { name, value } = e.target;
 
-        setNewMovie((prev) => ({
-        ...prev,
-        [name]: name === "rating" ? parseFloat(value) : value, // Convert rating to a float and keeping others as string
-        }));
+        if (name === "trailer" || name === "fullDescription") {
+            // Update inside the 'details' object
+            setNewMovie((prev) => ({
+                ...prev,
+                details: {
+                    ...prev.details,
+                    [name]: value,
+                },
+            }));
+        } else {
+            // Update top-level fields
+            setNewMovie((prev) => ({
+                ...prev,
+                [name]: name === "rating" ? parseFloat(value) : value,
+            }));
+        }
     };
 
   // Function triggered when submitting the form
@@ -30,8 +42,9 @@ const MovieForm = ({ open, addMovie }) => {
         setNewMovie({
             title       : '',
             description : '',
-            posterURL   : '',
+            posterURL   : 'https://png.pngtree.com/png-vector/20190820/ourmid/pngtree-no-image-vector-illustration-isolated-png-image_1694547.jpg',
             rating      : 0,
+            details     :   { trailer : "", fullDescription : "" }
         });
     };
 
@@ -52,11 +65,11 @@ const MovieForm = ({ open, addMovie }) => {
                     required
                 />
 
-                <label htmlFor="description" className="font-semibold">Description</label>
+                <label htmlFor="description" className="font-semibold">Short Description</label>
                 <textarea
                     name="description"
                     id="description"
-                    rows="5"
+                    rows="3"
                     value={newMovie.description}
                     onChange={handleChange}
                     className="border p-2 rounded-md"
@@ -83,6 +96,29 @@ const MovieForm = ({ open, addMovie }) => {
                     value={newMovie.posterURL}
                     onChange={handleChange}
                     placeholder="URL of the movie image..."
+                    className="border p-2 rounded-md"
+
+                />
+
+                <label htmlFor="fullDescription" className="font-semibold">Description</label>
+                <textarea
+                    name="fullDescription"
+                    id="fullDescription"
+                    rows="5"
+                    value={newMovie.details.fullDescription}
+                    onChange={handleChange}
+                    className="border p-2 rounded-md"
+                    required
+                />
+
+                <label htmlFor="trailer" className="font-semibold">Trailer URL (embed)</label>
+                <input
+                    type="text"
+                    name="trailer"
+                    id="trailer"
+                    value={newMovie.details.trailer}
+                    onChange={handleChange}
+                    placeholder="URL of the movie trailer..."
                     className="border p-2 rounded-md"
 
                 />
